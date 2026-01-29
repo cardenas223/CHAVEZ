@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dorksense - Rompiendo Límites</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fuentes Personalizadas */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Space+Mono:wght@700&family=Archivo+Black&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #FDF6E3;
+            overflow-x: hidden;
+        }
+
+        /* Estilos Neobrutalist Base */
+        .neo-border {
+            border: 6px solid #000000;
+        }
+
+        .neo-shadow {
+            box-shadow: 8px 8px 0px #000000;
+        }
+
+        .neo-shadow-sm {
+            box-shadow: 4px 4px 0px #000000;
+        }
+
+        .neo-shadow-lg {
+            box-shadow: 12px 12px 0px #000000;
+        }
+
+        .neo-shadow-color-pink {
+            box-shadow: 10px 10px 0px #FF006E;
+        }
+
+        .neo-shadow-color-blue {
+            box-shadow: 10px 10px 0px #3A86FF;
+        }
+
+        .neo-shadow-color-lime {
+            box-shadow: 10px 10px 0px #CCFF00;
+        }
+
+        /* Animación de Escritura */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .typing-text {
+            overflow: hidden;
+            border-right: 4px solid #FF006E;
+            white-space: nowrap;
+            animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
+        }
+
+        /* Animaciones de Rotación */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotate-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        .rotate-slow {
+            animation: rotate 20s linear infinite;
+        }
+
+        .rotate-slow-reverse {
+            animation: rotate-reverse 15s linear infinite;
+        }
+
+        /* Animaciones de Flotación */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        @keyframes float-alt {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(-5deg); }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-alt {
+            animation: float-alt 8s ease-in-out infinite;
+        }
+
+        /* Animaciones de Entrada */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+        }
+
+        .animate-on-scroll.visible {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        /* Animación Glitch */
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        .glitch:hover {
+            animation: glitch 0.3s infinite;
+        }
+
+        /* Marquesina */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee {
+            animation: marquee 30s linear infinite;
+        }
+
+        /* Efectos Hover */
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 12px 12px 0px #000000;
+        }
+
+        .hover-skew {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-skew:hover {
+            transform: skew(-2deg, -2deg) scale(1.05);
+        }
+
+        /* Botón Magnético */
+        .magnetic-btn {
+            transition: transform 0.2s ease;
+        }
+
+        /* Efecto Parallax */
+        .parallax {
+            transition: transform 0.5s ease-out;
+        }
+
+        /* Formas Decorativas */
+        .shape-circle {
+            border-radius: 50%;
+        }
+
+        .shape-blob {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+
+        /* Tipografía */
+        .font-black {
+            font-family: 'Archivo Black', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Gradientes Audaces */
+        .bg-gradient-crazy {
+            background: linear-gradient(135deg, #CCFF00 0%, #FF006E 50%, #3A86FF 100%);
+        }
+
+        .bg-gradient-sunset {
+            background: linear-gradient(135deg, #FF9500 0%, #8338EC 100%);
+        }
+
+        /* Input Styles */
+        input, textarea {
+            border: 5px solid #000000;
+            background: #FDF6E3;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px #FF006E;
+        }
+
+        /* Staggered Animation Delays */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+
+        /* Responsive Typography */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#FDF6E3]">
+
+    <!-- Formas Decorativas de Fondo -->
+    <div class="fixed top-20 left-10 w-32 h-32 bg-[#CCFF00] neo-border opacity-50 rotate-slow z-0"></div>
+    <div class="fixed top-40 right-20 w-40 h-40 bg-[#FF006E] shape-circle neo-border opacity-40 float z-0"></div>
+    <div class="fixed bottom-40 left-1/4 w-36 h-36 bg-[#3A86FF] neo-border opacity-30 rotate-slow-reverse shape-blob z-0"></div>
+    <div class="fixed bottom-20 right-1/3 w-28 h-28 bg-[#00F5D4] neo-border opacity-40 float-alt z-0"></div>
+
+    <!-- Sección Hero -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
+        <div class="container mx-auto z-10 relative">
+            <div class="text-center">
+                <!-- Título Principal -->
+                <h1 class="hero-title text-8xl md:text-9xl font-black text-[#000000] mb-8 glitch" style="font-family: 'Archivo Black', sans-serif; line-height: 0.9;">
+                    dorksense
+                </h1>
+                
+                <!-- Tagline con Animación de Escritura -->
+                <div class="flex justify-center mb-12">
+                    <p class="text-2xl md:text-3xl font-bold text-[#FF006E] typing-text inline-block">
+                        Donde lo extraño se vuelve extraordinario
+                    </p>
+                </div>
+
+                <!-- CTA Button -->
+                <button class="magnetic-btn neo-border neo-shadow bg-[#CCFF00] px-12 py-6 text-2xl font-bold hover-lift uppercase tracking-wider transform hover:scale-105 transition-all">
+                    <span class="text-[#000000]">¡Descubre Más!</span>
+                </button>
+
+                <!-- Decoración de Flecha Animada -->
+                <div class="mt-16 animate-bounce">
+                    <svg class="w-12 h-12 mx-auto text-[#FF006E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formas Flotantes Decorativas -->
+        <div class="absolute top-1/4 left-10 w-20 h-20 bg-[#FF9500] neo-border rotate-45 float"></div>
+        <div class="absolute bottom-1/4 right-10 w-24 h-24 bg-[#8338EC] neo-border shape-circle float-alt"></div>
+    </section>
+
+    <!-- Sección Sobre Nosotros / Características -->
+    <section id="features" class="relative py-20 px-4 bg-[#FDF6E3]">
+        <div class="container mx-auto max-w-7xl">
+            <!-- Título de Sección -->
+            <div class="text-center mb-16">
+                <h2 class="text-6xl md:text-7xl font-black text-[#000000] mb-4 inline-block neo-border bg-[#00F5D4] px-8 py-4 neo-shadow-lg transform -rotate-2">
+                    ¿QUÉ HACEMOS?
+                </h2>
+            </div>
+
+            <!-- Grid de Tarjetas Asimétricas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tarjeta 1 -->
+                <div class="animate-on-scroll stagger-1 neo-border neo-shadow-color-pink bg-[#CCFF00] p-8 hover-lift transform rotate-2">
+                    <div class="w-16 h-16 bg-[#FF006E] neo-border mb-6 flex items-center justify-center">
+                        <span class="text-4xl">🚀</span>
+                    </div>
+                    <h3 class="text-3xl font-bold text-[#000000] mb-4 font-mono">INNOVACIÓN</h3>
+                    <p class="text-lg text-[#000000] leading-relaxed">
+                        Rompemos las reglas del diseño tradicional para crear experiencias que nadie olvida.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="animate-on-scroll stagger-2 neo-border neo-shadow-color-blue bg-[#FF9500] p-8 hover-lift transform -rotate-1 lg:mt-12">
+                    <div class="w-16 h-16 bg-[#3A86FF] neo-border mb-6 flex items-center justify-center">
+                        <span class="text-4xl">⚡</span>
+                    </div>
+                    <h3 class="text-3xl font-bold text-[#000000] mb-4 font-mono">VELOCIDAD</h3>
+                    <p class="text-lg text-[#000000] leading-relaxed">
+                        Entregamos soluciones rápidas sin comprometer la creatividad ni la calidad brutal.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="animate-on-scroll stagger-3 neo-border neo-shadow-color-lime bg-[#8338EC] p-8 hover-lift transform rotate-1">
+                    <div class="w-16 h-16 bg-[#CCFF00] neo-border mb-6 flex items-center justify-center">
+                        <span class="text-4xl">🎨</span>
+                    </div>
+                    <h3 class="text-3xl font-bold text-[#FDF6E3] mb-4 font-mono">DISEÑO</h3>
+                    <p class="text-lg text-[#FDF6E3] leading-relaxed">
+                        Cada pixel tiene un propósito. Cada color cuenta una historia audaz y sin filtros.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 4 -->
+                <div class="animate-on-scroll stagger-4 neo-border neo-shadow bg-[#00F5D4] p-8 hover-lift transform -rotate-2 lg:col-span-2">
+                    <div class="w-16 h-16 bg-[#FF006E] neo-border mb-6 flex items-center justify-center">
+                        <span class="text-4xl">💡</span>
+                    </div>
+                    <h3 class="text-3xl font-bold text-[#000000] mb-4 font-mono">CREATIVIDAD EXTREMA</h3>
+                    <p class="text-lg text-[#000000] leading-relaxed">
+                        No seguimos tendencias, las creamos. Nuestro estilo es tan único que es imposible de ignorar.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 5 -->
+                <div class="animate-on-scroll stagger-5 neo-border neo-shadow-color-pink bg-[#3A86FF] p-8 hover-lift transform rotate-3">
+                    <div class="w-16 h-16 bg-[#FF9500] neo-border mb-6 flex items-center justify-center">
+                        <span class="text-4xl">🔥</span>
+                    </div>
+                    <h3 class="text-3xl font-bold text-[#FDF6E3] mb-4 font-mono">PASIÓN</h3>
+                    <p class="text-lg text-[#FDF6E3] leading-relaxed">
+                        Vivimos y respiramos diseño neobrutalist. Es nuestra obsesión y nuestra arte.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Galería / Showcase -->
+    <section id="gallery" class="relative py-20 px-4 bg-[#000000]">
+        <div class="container mx-auto max-w-7xl">
+            <!-- Título -->
+            <div class="text-center mb-16">
+                <h2 class="text-6xl md:text-7xl font-black text-[#CCFF00] mb-4 inline-block neo-border bg-[#FF006E] px-8 py-4 neo-shadow-lg transform rotate-1">
+                    NUESTRO TRABAJO
+                </h2>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Item 1 - Grande -->
+                <div class="col-span-2 row-span-2 neo-border neo-shadow-color-lime bg-[#FF006E] p-8 hover-skew group overflow-hidden relative">
+                    <div class="absolute inset-0 bg-[#CCFF00] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                    <div class="relative z-10 h-full flex items-center justify-center">
+                        <span class="text-9xl">🎪</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="animate-on-scroll neo-border neo-shadow bg-[#3A86FF] p-6 hover-skew group overflow-hidden relative">
+                    <div class="absolute inset-0 bg-[#00F5D4] transform translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                    <div class="relative z-10 h-full flex items-center justify-center">
+                        <span class="text-5xl">🎯</span>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="animate-on-scroll neo-border neo-shadow bg-[#CCFF00] p-6 hover-skew group overflow-hidden relative">
+                    <div class="absolute inset-0 bg-[#FF9500] transform translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                    <div class="relative z-10 h-full flex items-center justify-center">
+                        <span class="text-5xl">🌟</span>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="animate-on-scroll neo-border neo-shadow bg-[#FF9500] p-6 hover-skew group overflow-hidden relative">
+                    <div class="absolute inset-0 bg-[#8338EC] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                    <div class="relative z-10 h-full flex items-center justify-center">
+                        <span class="text-5xl">🎨</span>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="animate-on-scroll neo-border neo-shadow bg-[#8338EC] p-6 hover-skew group overflow-hidden relative">
+                    <div class="absolute inset-0 bg-[#FF006E] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                    <div class="relative z-10 h-full flex items-center justify-center">
+                        <span class="text-5xl">✨</span>
+                    </div>
+                </div>
+
+                <!-- Item 6 - Mediano -->
+                <div class="col-span-2 animate-on-scroll neo-border neo-shadow-color-blue bg-[#00F5D4] p-8 hover-skew group overflow-hidden relative">
+                    <div class="absolute inset-0 bg-[#CCFF00] transform translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                    <div class="relative z-10 h-full flex items-center justify-center">
+                        <span class="text-7xl">🚀</span>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="animate-on-scroll neo-border neo-shadow bg-[#FF006E] p-6 hover-skew group overflow-hidden relative">
+                    <div class="absolute inset-0 bg-[#3A86FF] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                    <div class="relative z-10 h-full flex items-center justify-center">
+                        <span class="text-5xl">💥</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Testimonios con Marquesina -->
+    <section id="testimonials" class="relative py-20 overflow-hidden bg-[#FF006E]">
+        <!-- Título -->
+        <div class="text-center mb-16 px-4">
+            <h2 class="text-6xl md:text-7xl font-black text-[#FDF6E3] mb-4 inline-block neo-border bg-[#000000] px-8 py-4 neo-shadow-lg transform -rotate-1">
+                LO QUE DICEN
+            </h2>
+        </div>
+
+        <!-- Marquesina Infinita -->
+        <div class="flex overflow-hidden">
+            <div class="marquee flex gap-8">
+                <!-- Testimonio 1 -->
+                <div class="neo-border neo-shadow bg-[#CCFF00] p-8 min-w-[400px] transform rotate-2">
+                    <div class="text-6xl text-[#FF006E] mb-4">"</div>
+                    <p class="text-xl font-bold text-[#000000] mb-4">
+                        ¡Increíble! Nunca había visto algo tan audaz y funcional a la vez.
+                    </p>
+                    <p class="text-lg font-mono text-[#000000]">- María González</p>
+                </div>
+
+                <!-- Testimonio 2 -->
+                <div class="neo-border neo-shadow bg-[#3A86FF] p-8 min-w-[400px] transform -rotate-1">
+                    <div class="text-6xl text-[#CCFF00] mb-4">"</div>
+                    <p class="text-xl font-bold text-[#FDF6E3] mb-4">
+                        dorksense transformó nuestra visión en una experiencia visual explosiva.
+                    </p>
+                    <p class="text-lg font-mono text-[#FDF6E3]">- Carlos Ruiz</p>
+                </div>
+
+                <!-- Testimonio 3 -->
+                <div class="neo-border neo-shadow bg-[#FF9500] p-8 min-w-[400px] transform rotate-1">
+                    <div class="text-6xl text-[#8338EC] mb-4">"</div>
+                    <p class="text-xl font-bold text-[#000000] mb-4">
+                        No tengo palabras. Es brutal, es hermoso, es perfecto.
+                    </p>
+                    <p class="text-lg font-mono text-[#000000]">- Ana Martínez</p>
+                </div>
+
+                <!-- Testimonio 4 -->
+                <div class="neo-border neo-shadow bg-[#00F5D4] p-8 min-w-[400px] transform rotate-2">
+                    <div class="text-6xl text-[#FF006E] mb-4">"</div>
+                    <p class="text-xl font-bold text-[#000000] mb-4">
+                        Rompieron todos los esquemas. Exactamente lo que necesitábamos.
+                    </p>
+                    <p class="text-lg font-mono text-[#000000]">- Pedro Sánchez</p>
+                </div>
+
+                <!-- Testimonio 5 -->
+                <div class="neo-border neo-shadow bg-[#8338EC] p-8 min-w-[400px] transform -rotate-2">
+                    <div class="text-6xl text-[#CCFF00] mb-4">"</div>
+                    <p class="text-xl font-bold text-[#FDF6E3] mb-4">
+                        Una obra maestra del diseño moderno. Absolutamente genial.
+                    </p>
+                    <p class="text-lg font-mono text-[#FDF6E3]">- Laura Fernández</p>
+                </div>
+
+                <!-- Duplicado para efecto infinito -->
+                <div class="neo-border neo-shadow bg-[#CCFF00] p-8 min-w-[400px] transform rotate-2">
+                    <div class="text-6xl text-[#FF006E] mb-4">"</div>
+                    <p class="text-xl font-bold text-[#000000] mb-4">
+                        ¡Increíble! Nunca había visto algo tan audaz y funcional a la vez.
+                    </p>
+                    <p class="text-lg font-mono text-[#000000]">- María González</p>
+                </div>
+
+                <div class="neo-border neo-shadow bg-[#3A86FF] p-8 min-w-[400px] transform -rotate-1">
+                    <div class="text-6xl text-[#CCFF00] mb-4">"</div>
+                    <p class="text-xl font-bold text-[#FDF6E3] mb-4">
+                        dorksense transformó nuestra visión en una experiencia visual explosiva.
+                    </p>
+                    <p class="text-lg font-mono text-[#FDF6E3]">- Carlos Ruiz</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto / CTA -->
+    <section id="contact" class="relative py-20 px-4 bg-[#FDF6E3]">
+        <div class="container mx-auto max-w-4xl">
+            <!-- Título -->
+            <div class="text-center mb-16">
+                <h2 class="text-6xl md:text-7xl font-black text-[#000000] mb-4 inline-block neo-border bg-[#CCFF00] px-8 py-4 neo-shadow-lg transform rotate-2">
+                    ¡HABLEMOS!
+                </h2>
+                <p class="text-2xl font-bold text-[#FF006E] mt-8">
+                    ¿Listo para hacer algo increíble juntos?
+                </p>
+            </div>
+
+            <!-- Formulario -->
+            <form class="space-y-8">
+                <div class="animate-on-scroll">
+                    <label class="block text-2xl font-bold text-[#000000] mb-3 font-mono">NOMBRE</label>
+                    <input 
+                        type="text" 
+                        class="w-full px-6 py-4 text-xl font-bold bg-[#FDF6E3]" 
+                        placeholder="Tu nombre aquí..."
+                    >
+                </div>
+
+                <div class="animate-on-scroll">
+                    <label class="block text-2xl font-bold text-[#000000] mb-3 font-mono">EMAIL</label>
+                    <input 
+                        type="email" 
+                        class="w-full px-6 py-4 text-xl font-bold bg-[#FDF6E3]" 
+                        placeholder="tu@email.com"
+                    >
+                </div>
+
+                <div class="animate-on-scroll">
+                    <label class="block text-2xl font-bold text-[#000000] mb-3 font-mono">MENSAJE</label>
+                    <textarea 
+                        rows="6" 
+                        class="w-full px-6 py-4 text-xl font-bold bg-[#FDF6E3] resize-none" 
+                        placeholder="Cuéntanos tu idea loca..."
+                    ></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="neo-border neo-shadow-lg bg-[#FF006E] px-16 py-6 text-3xl font-black hover-lift uppercase text-[#FDF6E3] transform hover:scale-105 transition-all">
+                        ¡ENVIAR!
+                    </button>
+                </div>
+            </form>
+
+            <!-- Elementos Decorativos -->
+            <div class="mt-16 flex justify-center gap-8 flex-wrap">
+                <div class="neo-border neo-shadow bg-[#3A86FF] px-8 py-4 transform -rotate-3">
+                    <span class="text-2xl font-bold text-[#FDF6E3]">✨ RÁPIDO</span>
+                </div>
+                <div class="neo-border neo-shadow bg-[#FF9500] px-8 py-4 transform rotate-2">
+                    <span class="text-2xl font-bold text-[#000000]">🚀 CREATIVO</span>
+                </div>
+                <div class="neo-border neo-shadow bg-[#00F5D4] px-8 py-4 transform -rotate-1">
+                    <span class="text-2xl font-bold text-[#000000]">💥 BRUTAL</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-16 px-4 bg-[#000000] border-t-8 border-[#CCFF00]">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Columna 1 -->
+                <div>
+                    <h3 class="text-4xl font-black text-[#CCFF00] mb-6">dorksense</h3>
+                    <p class="text-lg text-[#FDF6E3] leading-relaxed">
+                        Diseño neobrutalist que rompe límites y crea experiencias inolvidables.
+                    </p>
+                </div>
+
+                <!-- Columna 2 -->
+                <div>
+                    <h4 class="text-2xl font-bold text-[#FF006E] mb-6 font-mono">ENLACES</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#hero" class="text-xl text-[#FDF6E3] hover:text-[#CCFF00] transition-colors">Inicio</a></li>
+                        <li><a href="#features" class="text-xl text-[#FDF6E3] hover:text-[#CCFF00] transition-colors">Características</a></li>
+                        <li><a href="#gallery" class="text-xl text-[#FDF6E3] hover:text-[#CCFF00] transition-colors">Galería</a></li>
+                        <li><a href="#contact" class="text-xl text-[#FDF6E3] hover:text-[#CCFF00] transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3 -->
+                <div>
+                    <h4 class="text-2xl font-bold text-[#3A86FF] mb-6 font-mono">SÍGUENOS</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="neo-border neo-shadow-sm bg-[#FF006E] w-14 h-14 flex items-center justify-center hover-lift group">
+                            <span class="text-2xl group-hover:scale-125 transition-transform">📱</span>
+                        </a>
+                        <a href="#" class="neo-border neo-shadow-sm bg-[#00F5D4] w-14 h-14 flex items-center justify-center hover-lift group">
+                            <span class="text-2xl group-hover:scale-125 transition-transform">🐦</span>
+                        </a>
+                        <a href="#" class="neo-border neo-shadow-sm bg-[#FF9500] w-14 h-14 flex items-center justify-center hover-lift group">
+                            <span class="text-2xl group-hover:scale-125 transition-transform">💼</span>
+                        </a>
+                        <a href="#" class="neo-border neo-shadow-sm bg-[#8338EC] w-14 h-14 flex items-center justify-center hover-lift group">
+                            <span class="text-2xl group-hover:scale-125 transition-transform">📧</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t-4 border-[#CCFF00] text-center">
+                <p class="text-xl font-bold text-[#FDF6E3]">
+                    © 2026 dorksense - Rompiendo límites desde el futuro 🚀
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript para Animaciones e Interacciones -->
+    <script>
+        // Animaciones al Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todos los elementos con animación
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Efecto Parallax en Scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(el => {
+                const speed = el.dataset.speed || 0.5;
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Efecto Magnético en Botones
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // Prevenir envío del formulario (demo)
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! (Este es un demo)');
+        });
+
+        // Cambio de Color de Fondo al Scroll (secciones)
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const scrollPos = window.scrollY + window.innerHeight / 2;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+
+                if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                    // Agregar efectos adicionales según la sección activa
+                }
+            });
+        });
+
+        // Smooth Scroll para los enlaces
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efecto de Cursor Personalizado (opcional)
+        let cursor = document.createElement('div');
+        cursor.style.cssText = `
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #FF006E;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+            display: none;
+        `;
+        document.body.appendChild(cursor);
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.display = 'block';
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+        });
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2)';
+                cursor.style.borderColor = '#CCFF00';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.borderColor = '#FF006E';
+            });
+        });
+
+        // Animación de Números Contadores (si se necesita)
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+
+        // Inicializar animaciones cuando la página carga
+        window.addEventListener('load', () => {
+            // Agregar clase de carga
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
