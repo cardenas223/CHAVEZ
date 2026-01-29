@@ -293,7 +293,7 @@
                 </div>
 
                 <!-- CTA Button -->
-                <button class="magnetic-btn neo-border neo-shadow bg-[#CCFF00] px-12 py-6 text-2xl font-bold hover-lift uppercase tracking-wider transform hover:scale-105 transition-all">
+                <button class="magnetic-btn neo-border neo-shadow bg-[#CCFF00] px-12 py-6 text-2xl font-bold hover-lift uppercase tracking-wider transition-all" aria-label="Descubrir más sobre dorksense">
                     <span class="text-[#000000]">¡Descubre Más!</span>
                 </button>
 
@@ -543,31 +543,37 @@
             </div>
 
             <!-- Formulario -->
-            <form class="space-y-8">
+            <form id="contact-form" class="space-y-8">
                 <div class="animate-on-scroll">
-                    <label class="block text-2xl font-bold text-[#000000] mb-3 font-mono">NOMBRE</label>
+                    <label for="name" class="block text-2xl font-bold text-[#000000] mb-3 font-mono">NOMBRE</label>
                     <input 
+                        id="name"
                         type="text" 
                         class="w-full px-6 py-4 text-xl font-bold bg-[#FDF6E3]" 
                         placeholder="Tu nombre aquí..."
+                        aria-label="Tu nombre"
                     >
                 </div>
 
                 <div class="animate-on-scroll">
-                    <label class="block text-2xl font-bold text-[#000000] mb-3 font-mono">EMAIL</label>
+                    <label for="email" class="block text-2xl font-bold text-[#000000] mb-3 font-mono">EMAIL</label>
                     <input 
+                        id="email"
                         type="email" 
                         class="w-full px-6 py-4 text-xl font-bold bg-[#FDF6E3]" 
                         placeholder="tu@email.com"
+                        aria-label="Tu correo electrónico"
                     >
                 </div>
 
                 <div class="animate-on-scroll">
-                    <label class="block text-2xl font-bold text-[#000000] mb-3 font-mono">MENSAJE</label>
+                    <label for="message" class="block text-2xl font-bold text-[#000000] mb-3 font-mono">MENSAJE</label>
                     <textarea 
+                        id="message"
                         rows="6" 
                         class="w-full px-6 py-4 text-xl font-bold bg-[#FDF6E3] resize-none" 
                         placeholder="Cuéntanos tu idea loca..."
+                        aria-label="Tu mensaje"
                     ></textarea>
                 </div>
 
@@ -620,16 +626,16 @@
                 <div>
                     <h4 class="text-2xl font-bold text-[#3A86FF] mb-6 font-mono">SÍGUENOS</h4>
                     <div class="flex gap-4">
-                        <a href="#" class="neo-border neo-shadow-sm bg-[#FF006E] w-14 h-14 flex items-center justify-center hover-lift group">
+                        <a href="#" aria-label="Instagram" class="neo-border neo-shadow-sm bg-[#FF006E] w-14 h-14 flex items-center justify-center hover-lift group">
                             <span class="text-2xl group-hover:scale-125 transition-transform">📱</span>
                         </a>
-                        <a href="#" class="neo-border neo-shadow-sm bg-[#00F5D4] w-14 h-14 flex items-center justify-center hover-lift group">
+                        <a href="#" aria-label="Twitter" class="neo-border neo-shadow-sm bg-[#00F5D4] w-14 h-14 flex items-center justify-center hover-lift group">
                             <span class="text-2xl group-hover:scale-125 transition-transform">🐦</span>
                         </a>
-                        <a href="#" class="neo-border neo-shadow-sm bg-[#FF9500] w-14 h-14 flex items-center justify-center hover-lift group">
+                        <a href="#" aria-label="LinkedIn" class="neo-border neo-shadow-sm bg-[#FF9500] w-14 h-14 flex items-center justify-center hover-lift group">
                             <span class="text-2xl group-hover:scale-125 transition-transform">💼</span>
                         </a>
-                        <a href="#" class="neo-border neo-shadow-sm bg-[#8338EC] w-14 h-14 flex items-center justify-center hover-lift group">
+                        <a href="#" aria-label="Email" class="neo-border neo-shadow-sm bg-[#8338EC] w-14 h-14 flex items-center justify-center hover-lift group">
                             <span class="text-2xl group-hover:scale-125 transition-transform">📧</span>
                         </a>
                     </div>
@@ -693,25 +699,13 @@
         });
 
         // Prevenir envío del formulario (demo)
-        document.querySelector('form').addEventListener('submit', (e) => {
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('¡Gracias por tu mensaje! (Este es un demo)');
         });
 
-        // Cambio de Color de Fondo al Scroll (secciones)
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const scrollPos = window.scrollY + window.innerHeight / 2;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionBottom = sectionTop + section.offsetHeight;
-
-                if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-                    // Agregar efectos adicionales según la sección activa
-                }
-            });
-        });
+        // Smooth scroll tracking for future enhancements
+        // Reserved for additional scroll-based effects if needed
 
         // Smooth Scroll para los enlaces
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -759,26 +753,8 @@
             });
         });
 
-        // Animación de Números Contadores (si se necesita)
-        function animateCounter(element, target, duration = 2000) {
-            let start = 0;
-            const increment = target / (duration / 16);
-            const timer = setInterval(() => {
-                start += increment;
-                if (start >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(start);
-                }
-            }, 16);
-        }
-
-        // Inicializar animaciones cuando la página carga
-        window.addEventListener('load', () => {
-            // Agregar clase de carga
-            document.body.classList.add('loaded');
-        });
+        // Página completamente cargada
+        console.log('dorksense website loaded successfully!');
     </script>
 </body>
 </html>
